@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<!--[if IE 7 ]><body class="ie ie7"><![endif]-->
+<!--[if IE 8 ]><body class="ie ie8"><![endif]-->
+<!--[if IE 9 ]><body class="ie ie9"><![endif]-->
+<html class='no-js' lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, maximum-scale=1.0">
+    <title>CitiBank</title>
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800&subset=vietnamese" rel="stylesheet">
+    <link type="image/x-icon" href="{{ url_for('static', filename='images/fav.png')}}" rel="shortcut icon">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/font-awesome.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/responsive.css')}}">
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-86733216-1', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+</head>
+
+<body>
+    <!--===========================-->
+    <!--==========Header===========-->
+    <div id="preloader">
+        <div id="status">
+            <div class="spinner">
+                <div class="bounce1"></div>
+                <div class="bounce2"></div>
+                <div class="bounce3"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="main-holder">
+        <header class='main-wrapper header'>
+            <div class="container apex">
+                <div class="row">
+
+                    <nav class="navbar header-navbar" role="navigation">
+                        <div class="navbar-header">
+                            <div class="logo navbar-brand">
+                                <a href="#" title="Citi"></a>
+                            </div>
+                        </div>
+
+                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                            <div class="navbar-right">
+                            </div>
+                        </div>
+                    </nav>
+
+                </div>
+            </div>
+        </header>
+
+        <div class='main-wrapper content'>
+            <section class="relative software_slider">
+                <div class="forma-slider">
+                    <div class="container">
+                        <div class="row">
+                             <div id="form_slider" data-anchor="form_slider">
+                                <ul class="form-bxslider list-unstyled">
+                                    <li>
+                                        <div class="list-forstart fin_1">
+                                            <p class="text-1">MỞ THẺ CITI ONLINE</p>
+                                            <p class="text-2">CƠ HỘI NHẬN ĐƯỢC ĐỒNG HỒ MISFIT TRỊ GIÁ 1 TRIỆU ĐỒNG</p>
+                                            <p class="text-3">*Chỉ áp dụng đến hết ngày 07/05/2017 tại TP. Hồ Chí Minh và Hà Nội</p>
+                                        </div>
+                                        <div class="img-slider dong-ho fin_2"></div>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div class="clearfix visible-xs visible-md"></div>
+
+                            <div class="container relative fin_3" id='elem-portable'>
+                                <div class="reg-now">
+
+                                    {% for field in form if field.widget.input_type != 'hidden' %}
+                                        {% if field.errors %}
+                                        <div class='alert alert-danger'><a class='close' data-dismiss='alert'>×</a>
+                                            {%for error in field.errors%}
+                                                {{error}}</br>
+                                            {%endfor%}
+                                        </div>
+                                        {%endif%}
+                                    {%endfor%}
+
+                                    <form class='reg-now-visible' id='formIndex' action="/" method="post" accept-charset="utf-8" role="form">
+                                        {{ form.hidden_tag() }}
+                                        <p>Thẻ tín dụng Citi nằm trong tầm tay bạn. Hãy điền thông tin của bạn và chúng tôi sẽ gọi ngay cho bạn trong 24 giờ để hỗ trợ bạn đăng ký:</p>
+                                        <p class="title-form">Bạn có nhận lương qua ngân hàng không?</p>
+                                        <div class="radio-custom radio-danger fl mr-10">
+                                            {%if form.luong.data == 'yes'%}
+                                            <input type="radio" id="yes" name="luong" value="yes" required oninvalid="setCustomValidity('Xin vui lòng chọn một ô')" onclick="clearValidity()" checked/>
+                                            {%else%}
+                                            <input type="radio" id="yes" name="luong" value="yes" required oninvalid="setCustomValidity('Xin vui lòng chọn một ô')" onclick="clearValidity()"/>
+                                            {%endif%}
+                                            <label for="yes">Có</label>
+                                        </div>
+                                        <div class="radio-custom radio-danger fl">
+                                            {%if form.luong.data == 'no'%}
+                                            <input type="radio" id="no" name="luong" value="no" required onclick="clearValidity()" checked/>
+                                            {%else%}
+                                            <input type="radio" id="no" name="luong" value="no" required onclick="clearValidity()"/>
+                                            {%endif%}
+                                            <label for="no">Không</label>
+                                        </div>
+                                        <div class="clr"></div>
+                                        <p class="title-form mb-10">Thông tin cá nhân</p>
+                                        <div class='control-group'>
+                                            <input type="text" name="name" {%if form.data.name%} value="{{form.data.name|safe}}" {%endif%} placeholder='Họ và tên' required oninvalid="setCustomValidity('Tên không chính xác!')" oninput="setCustomValidity('')"/>
+                                        </div>
+
+                                        <div class='control-group'>
+                                            <input type="text" id="phone" name="phone" value={%if form.data.phone%} "{{form.data.phone|safe}}" {%else%} "" {%endif%} placeholder='Số điện thoại' required pattern="^[0-9]{10,12}$" oninvalid="setCustomValidity('Số điện thoại không chính xác')" oninput="setCustomValidity('')"/>
+                                        </div>
+
+                                        <div class='control-group'>
+                                            <input type="text" name="email" value={%if form.data.email%} "{{form.data.email|safe}}" {%else%} "" {%endif%} class='insert-attr' placeholder='Địa chỉ email' required pattern="[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" oninvalid="setCustomValidity('Email không chính xác!')" oninput="setCustomValidity('')"/>
+                                        </div>
+                                        <div class="relative">
+                                            {{slbox_caoch|safe}}
+                                        </div>
+                                        <div class="checkbox-custom checkbox-danger">
+                                            {%if form.toidongy.data%}
+                                            <input type="checkbox" id="toidongy" name="toidongy" required oninvalid="setCustomValidity('Bạn phải đồng ý với điều khoản này')" onchange="setCustomValidity('')" checked/>
+                                            {%else%}
+                                            <input type="checkbox" id="toidongy" name="toidongy" required oninvalid="setCustomValidity('Bạn phải đồng ý với điều khoản này')" onchange="setCustomValidity('')"/>
+                                            {%endif%}
+
+                                            <label for="toidongy" class="label-form-dk">Tôi đồng ý rằng CitiBank có thể sử dụng thông tin trên đây để liên hệ với tôi nhằm giới thiệu những sản phẩm, dịch vụ và chương trình khuyến mãi của CitiBank từ nay trở về sau</label>
+                                        </div>
+
+                                        <button type="submit" value="Register Now" class='btn submit sub-form' name="submit">Hoàn thành và Gửi</button>
+                                        <input type="hidden" name="tabs" id="tabs" value="{{form.data.tabs|safe}}"/>
+                                    </form>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- end container -->
+                </div>
+            </section>
+
+
+            <section class="container make-row">
+                <div class="row">
+                    <div class="col-sm-12 col-md-4 media-wr fadeOutBigLeft" id="animIt5">
+                        <div class="excerpt" key="1" href="#" data-scroll="form_slider">
+                            <div class="cash2">
+                                <div class="bank-card fl">
+                                    <img src="{{ url_for('static', filename='images/cash-bank.png')}}">
+                                </div>
+                                <div class="card-info fl">
+                                    <p class="title1">CASH BACK</p>
+                                    <p class="title2">Điều kiện đăng ký:</p>
+                                    <p>
+                                        Thật đơn giản, bạn chỉ cần:
+                                        <br>• Trên 21 tuổi
+                                        <br>• Thu nhập hàng tháng từ 10 triệu VND trở lên
+                                        <br>• Nhận lương qua tài khoản ngân hàng
+                                    </p>
+                                </div>
+                                <div class="clr"></div>
+                            </div>
+                            <div class="more-info">
+                                <ul class="u2">
+                                    <li class="li7">Tặng vali du lịch “I travel the world” 20” cao cấp</li>
+                                    <li class="li11">Cơ hội nhận iPhone 7 32GB. <a href="https://www.citibank.com.vn/vietnamese/form/dynamiccard_applynow/pdf/TC-Trolley-bag-VI-Dec-2016.pdf">Chi tiết tại đây</a></li>
+                                    <li class="li1">Hoàn tiền đến 5% chi tiêu thẻ (lên đến 7,2 triệu VNĐ/năm) </li>
+                                    <li class="li2">Ưu đãi mua sắm trả góp Citi 0% Mọi Nơi với phí chuyển đổi chỉ 4,5% trên giá trị giao dịch.</li>
+                                    <li class="li3">Trải nghiệm chuyến đi đầu tiên miễn phí với Uber, chương trình nâng cỡ ly Starbucks miễn phí, tặng 1 bắp + 2 nước khi mua 2 vé xem phim CGV hay Lotte Cinema mỗi thứ Bảy và chiết khấu đến 50% khi mua sắm, ăn uống và du lịch cùng Thẻ Citi Cash Back.</li>
+
+                                </ul>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-12 col-md-4  fadeOutBottom" id="animIt6">
+                        <div class="excerpt" key="2" href="#" data-scroll="form_slider">
+                            <div class="cash2">
+                                <div class="bank-card fl">
+                                    <img src="{{ url_for('static', filename='images/primier.png')}}">
+                                </div>
+                                <div class="card-info fl">
+                                    <p class="title1">PREMIERMILES</p>
+                                    <p class="title2">Điều kiện đăng ký:</p>
+                                    <p>
+                                        Thật đơn giản, bạn chỉ cần:
+                                        <br>• Trên 21 tuổi
+                                        <br>• Thu nhập hàng tháng từ 10 triệu VND trở lên
+                                        <br>• Nhận lương qua tài khoản ngân hàng
+                                    </p>
+                                </div>
+                                <div class="clr"></div>
+                            </div>
+                            <div class="more-info ">
+                                <ul class="u2">
+                                    <li class="li7">Tặng vali du lịch “I travel the world” 24” cao cấp</li>
+                                    <li class="li11">Cơ hội nhận iPhone 7 32GB. <a href="https://www.citibank.com.vn/vietnamese/form/dynamiccard_applynow/pdf/TC-Trolley-bag-VI-Dec-2016.pdf">Chi tiết tại đây</a></li>
+                                    <li class="li4">Nhận 01 Dặm PremierMile cho mỗi 25.000 VNĐ chi tiêu để quy đổi vé máy bay, đêm nghỉ khách sạn hoặc chi trả chi phí du lịch</li>
+                                    <li class="li5">Tặng thẻ Priority Pass vào phòng chờ VIP tại hơn 900 sân bay quốc tế kèm 01 lần sử dụng dịch vụ miễn phí mỗi quý</li>
+                                    <li class="li6">Trải nghiệm chuyến đi đầu tiên miễn phí với Uber, ưu đãi mua sắm trả góp Citi 0% Mọi Nơi, chương trình nâng cỡ ly Starbucks miễn phí và chiết khấu đến 50% khi mua sắm, ăn uống và du lịch cùng Thẻ Citi PremierMiles</li>
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-12 col-md-4 fadeOutBigRight" id="animIt7">
+                        <div class="excerpt" key="3" href="#" data-scroll="form_slider">
+                            <div class="cash2">
+                                <div class="bank-card fl">
+                                    <img src="{{ url_for('static', filename='images/reward.png')}}">
+                                </div>
+                                <div class="card-info fl">
+                                    <p class="title1">REWARDS</p>
+                                    <p class="title2">Điều kiện đăng ký:</p>
+                                    <p>
+                                        Thật đơn giản, bạn chỉ cần:
+                                        <br>• Trên 21 tuổi
+                                        <br>• Thu nhập hàng tháng từ 10 triệu VND trở lên
+                                        <br>• Nhận lương qua tài khoản ngân hàng
+                                    </p>
+                                </div>
+                                <div class="clr"></div>
+                            </div>
+                            <div class="more-info ">
+                                <ul class="u2">
+                                    <li class="li11">Cơ hội nhận iPhone 7 32GB. <a href="https://www.citibank.com.vn/vietnamese/form/dynamiccard_applynow/pdf/TC-Trolley-bag-VI-Dec-2016.pdf">Chi tiết tại đây</a></li>
+                                    <li class="li10">Tận hưởng x5 lần Điểm Thưởng suốt năm khi chi tiêu tại các địa điểm Mua sắm, Ăn uống, Giải trí. </li>
+                                    <li class="li8">Đổi điểm thưởng lấy nhiều quà tặng phong phú. Điểm thưởng Citi không có thời hạn sử dụng. Danh sách quà tặng <a href="https://www.citibank.com.vn/views/images/credit_card/overviewBanner/4.png
+" target="_blank">tại đây</a></li>
+                                    <li class="li3">Tận hưởng hàng triệu ưu đãi tại hàng ngàn điểm chấp nhận thẻ ở hơn 30 quốc gia
+                                        <br>
+                                        <br>
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="clr"></div>
+            </section>
+        </div>
+
+        <!--===========================-->
+        <!--=========Footer============-->
+        <footer class='main-wrapper footer'>
+            <div class="partners" id='partners'>
+                <div class="container">
+                    <div class="row">
+                        <div class=" col-md-6">
+                            <div class="img1 fl">
+                                <a href="#">
+                                    <img src="{{ url_for('static', filename='images/img1.jpg')}}">
+                                </a>
+                            </div>
+                            <div class="img2 fl">
+                                <a href="#">
+                                    <img src="{{ url_for('static', filename='images/img2.jpg')}}">
+                                </a>
+                            </div>
+                            <div class="img3 fl">
+                                <a href="#">
+                                    <img src="{{ url_for('static', filename='images/img3.jpg')}}">
+                                </a>
+                            </div>
+
+                        </div>
+                        <div class=" col-md-6">
+                            <div class="img4 fl">
+                                <a href="#">
+                                    <img src="{{ url_for('static', filename='images/img4.jpg')}}">
+                                </a>
+                            </div>
+                            <div class="img5 fl">
+                                <a href="#">
+                                    <img src="{{ url_for('static', filename='images/img5.jpg')}}">
+                                </a>
+                            </div>
+                            <div class="img6 fl">
+                                <a href="#">
+                                    <img src="{{ url_for('static', filename='images/img6.jpg')}}">
+                                </a>
+                            </div>
+                            <div class="img7 fl">
+                                <a href="#">
+                                    <img src="{{ url_for('static', filename='images/img7.png')}}">
+                                </a>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div class="clr"></div>
+                </div>
+            </div>
+            <div class="container f-dk">
+                <p class="text-center footer-text-1">
+                    CÓ HÀNG NGÀN <span class="text-red-b">ƯU ĐÃI HẤP DẪN</span> ĐANG CHỜ BẠN
+                </p>
+                <p class="text-center footer-text-2">
+                    Thẻ tín dụng Citi nằm trong tầm tay bạn.
+                    <br> Hãy điền thông tin của bạn và chúng tôi sẽ gọi ngay cho bạn trong 24 giờ để hỗ trợ bạn đăng ký.
+                </p>
+                <a href="#" data-scroll="form_slider" class='btn submit a-trig reg-footer'>Đăng Ký Ngay</a>
+            </div>
+
+
+           <div class="container bottom">
+                <div class="fl copyright">Copyright (C) 2016 Interspace Vietnam Co .,Ltd . All Rights Reserved.</div>
+                <nav>
+                    <ul style="margin:0px;">
+                        <li class="firstItem">
+                            <a href="javascript:void(0);"><img src="/statics/images/logo1.png"></a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+
+
+        </footer>
+
+
+        <!-- Top -->
+        <div id="back-top-wrapper" class="visible-lg">
+            <p id="back-top" class='bounceOut'>
+                <a href="#top">
+                    <span></span>
+                </a>
+            </p>
+        </div>
+
+    </div>
+    <div class="mask"></div>
+    <script src="{{ url_for('static', filename='js/jquery-1.10.1.min.js')}}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js')}}"></script>
+    <script src="{{ url_for('static', filename='js/modernizr.js')}}"></script>
+    <script src="{{ url_for('static', filename='js/jquery.bxslider.min.js')}}"></script>
+    <script src="{{ url_for('static', filename='js/jquery.customSelect.js')}}"></script>
+    <script src="{{ url_for('static', filename='js/jquery.validate.min.js')}}"></script>
+    <script src="{{ url_for('static', filename='js/jquery.colorbox-min.js')}}"></script>
+    <script src="{{ url_for('static', filename='js/custom.js')}}"></script>
+    <script src="{{ url_for('static', filename='js/loader.js')}}"></script>
+    <script src="{{ url_for('static', filename='js/tracking.js')}}" ></script>
+
+    <script type="text/javascript">
+        AT.track();
+        function clearValidity() {
+            document.getElementById('yes').setCustomValidity('');
+        }
+
+        function onInvalidCustom(idstr) {
+            var me = document.getElementById(idstr);
+            me.setCustomValidity('Số điện thoại không chính xác');
+            //me.setCustomValidity('');
+        }
+
+        function getCookie(cname) {
+                var name = cname + "=";
+                var ca = document.cookie.split(';');
+                for(var i = 0; i <ca.length; i++) {
+                var c = ca[i];
+                while (c.charAt(0)==' ') {
+                        c = c.substring(1);
+                    }
+                    if (c.indexOf(name) == 0) {
+                        return c.substring(name.length,c.length);
+                    }
+                }
+                return "";
+        }
+            //alert(getCookie("_aff_network") + "|" + getCookie("_aff_sid"))
+            $("#aff_source").val(getCookie("_aff_network"));
+            $("#aff_sid").val(getCookie("_aff_sid"));
+
+
+        $(".excerpt").each(function(){
+            if($(this).attr('key') == $("#tabs").val()){
+                $(this).addClass('active');
+            }
+        });
+
+        $(".excerpt").hover(function(){
+            $(".excerpt").each(function(){
+                $(this).removeClass('active');
+            });
+            $(this).addClass('active');
+            $("#tabs").val($(this).attr('key'));
+        });
+
+        $(document).ready(function(){
+            $('input[name=email]').keyup(function() {
+                  this.value = this.value.toLowerCase();
+                });
+
+            $(".excerpt a").click(function(){
+                window.open($(this).attr('href'));
+            });
+          });
+    </script>
+</body>
+
+</html>
