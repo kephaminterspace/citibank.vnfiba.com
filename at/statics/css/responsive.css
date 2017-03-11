@@ -147,14 +147,14 @@
 
 @media (max-width: 767px) and (min-width: 700px) {
     .img-slider {
-        background: url(../images/slider_man3.png) no-repeat;
+        background: url(../images/dongho.png) no-repeat;
         background-size: 86%;
     }
 }
 
 @media (max-width: 700px) and (min-width: 600px) {
     .img-slider {
-        background: url(../images/slider_man3.png) no-repeat;
+        background: url(../images/dongho.png) no-repeat;
         background-size: 70%;
         left: 80%;
         top: -12%;
@@ -412,7 +412,7 @@
 
 @media (max-width: 600px) {
     .img-slider {
-        background: url(../images/slider_man3.png) no-repeat;
+        background: url(../images/dongho.png) no-repeat;
         background-size: 70%;
         left: 86%;
         top: -14%;
@@ -449,7 +449,7 @@
         color: #FF9800;
     }
     .img-slider {
-        background: url(../images/slider_man3.png) no-repeat;
+        background: url(../images/dongho.png) no-repeat;
         background-size: 70%;
         left: 86%;
         top: -22%;
